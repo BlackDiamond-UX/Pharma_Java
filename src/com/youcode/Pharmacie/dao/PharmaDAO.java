@@ -11,9 +11,9 @@ import java.util.List;
 import com.youcode.Pharmacie.model.Pharma;
 
 public class PharmaDAO {
-	private String jdbcURL = "jdbc:mysql://localhost:3306/sante?useSSL=false";
-	private String jdbcUsername = "root";
-	private String jdbcPassword = "";
+	private String jdbcURL = "jdbc:postgresql://localhost:5432/sante?useSSL=false";
+	private String jdbcUsername = "postgres";
+	private String jdbcPassword = "admin";
 
 	private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (article, company, price) VALUES "
 			+ " (?, ?, ?);";
@@ -29,7 +29,7 @@ public class PharmaDAO {
 	protected Connection getConnection() {
 		Connection connection = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("org.postgresql.Driver");
 			connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
