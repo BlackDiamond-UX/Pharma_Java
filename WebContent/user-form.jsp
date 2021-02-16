@@ -72,6 +72,11 @@
 																value="<c:out value='${item.qun}' />" class="form-control"
 																name="qun">
 						</fieldset>
+						<fieldset class="form-group">
+							<label>Article Description</label> <input type="text"
+																   value="<c:out value='${item.description}' />" class="form-control"
+																   name="description">
+						</fieldset>
 					<button type="submit" class="btn btn-success">Save</button>
 				</form>
 		</div>

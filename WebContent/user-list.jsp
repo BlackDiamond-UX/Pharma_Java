@@ -45,6 +45,7 @@
 				<th>Company</th>
 				<th>Price</th>
 				<th>Quantity</th>
+				<th>Description</th>
 				<th>Actions</th>
 			</tr>
 			</thead>
@@ -57,6 +58,7 @@
 					<td><c:out value="${item.company}" /></td>
 					<td><c:out value="${item.price}" /></td>
 					<td><c:out value="${item.qun}" /></td>
+					<td><c:out value="${item.description}" /></td>
 					<td><a href="edit?id=<c:out value='${item.id}' />" class="btn btn-outline-danger">Edit</a>
 						&nbsp;&nbsp;&nbsp;&nbsp; <a
 								href="delete?id=<c:out value='${item.id}' />" class="btn btn-outline-warning">Delete</a></td>

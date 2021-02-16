@@ -7,26 +7,29 @@ public class Article {
 	protected String company;
 	protected int price;
 	protected int qun;
+	protected String description;
 	
 	public Article() {
 		super();
 	}
 	
-	public Article(String nom, String company, int price, int qun) {
+	public Article(String nom, String company, int price, int qun , String description) {
 		super();
 		this.nom = nom;
 		this.company = company;
 		this.price = price;
 		this.qun = qun;
+		this.description= description;
 	}
 
-	public Article(int id, String nom, String company, int price, int qun) {
+	public Article(int id, String nom, String company, int price, int qun , String description) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.company = company;
 		this.price = price;
 		this.qun = qun;
+		this.description= description;
 	}
 
 	public int getId() {
@@ -67,6 +70,14 @@ public class Article {
 
 	public void setQun(int qun) {
 		this.qun = qun;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }
 

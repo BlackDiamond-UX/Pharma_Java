@@ -17,7 +17,6 @@ import com.youcode.Pharmacie.model.Article;
 
 @WebServlet("/")
 public class ArticlesServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 	private ArticlesDAOimp articlesDAOimp;
 	private Article newArticle;
 
@@ -91,7 +90,8 @@ public class ArticlesServlet extends HttpServlet {
 		String company = request.getParameter("company");
 		int price =  Integer.parseInt(request.getParameter("price"));
 		int qun = Integer.parseInt(request.getParameter("qun"));
-		Article newArticle = new Article( nom, company, price,qun);
+		String description = request.getParameter("description");
+		Article newArticle = new Article( nom, company, price,qun , description);
 		articlesDAOimp.save(newArticle);
 		response.sendRedirect("list");
 	}
@@ -103,8 +103,9 @@ public class ArticlesServlet extends HttpServlet {
 		String company = request.getParameter("company");
 		int price = Integer.parseInt(request.getParameter("price"));
 		int qun = Integer.parseInt(request.getParameter("qun"));
+		String description = request.getParameter("description");
 
-		Article book = new Article(id, nom, company, price,qun);
+		Article book = new Article(id, nom, company, price,qun,description);
 		articlesDAOimp.update(book);
 		response.sendRedirect("list");
 	}

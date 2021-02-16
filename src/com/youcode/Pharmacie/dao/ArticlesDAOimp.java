@@ -16,11 +16,11 @@ public class ArticlesDAOimp implements com.youcode.Pharmacie.dao.DAO {
 
 
     private static final String SELECT_ALL_ARTICLES = "select * from public.\"Article\"";
-    private static final String SELECT_ARTICLES_BY_ID = "select nom,company,price,qun from public.\"Article\" where id =?";
+    private static final String SELECT_ARTICLES_BY_ID = "select nom,company,price,qun,description from public.\"Article\" where id =?";
     private static final String DELETE_ARTICLES_SQL = "delete from public.\"Article\" where id = ?;";
-    private static final String UPDATE_ARTICLES_SQL = "update public.\"Article\" set nom = ?,company= ?, price =?,qun=? where id = ?;";
-    private static final String INSERT_ARTICLES_SQL = "INSERT INTO public.\"Article\"" + "  (nom, company, price,qun) VALUES "
-            + " (?, ?, ?,?);";
+    private static final String UPDATE_ARTICLES_SQL = "update public.\"Article\" set nom = ?,company= ?, price =?,qun=?,description=? where id = ?;";
+    private static final String INSERT_ARTICLES_SQL = "INSERT INTO public.\"Article\"" + "  (nom, company, price,qun,description) VALUES "
+            + " (?, ?, ?,?,?);";
 
     public void save(Article item) throws SQLException {
         System.out.println(INSERT_ARTICLES_SQL);
@@ -31,6 +31,7 @@ public class ArticlesDAOimp implements com.youcode.Pharmacie.dao.DAO {
             preparedStatement.setString(2, item.getCompany());
             preparedStatement.setInt(3, item.getPrice());
             preparedStatement.setInt(4, item.getQun());
+            preparedStatement.setString(5, item.getDescription());
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -55,7 +56,8 @@ public class ArticlesDAOimp implements com.youcode.Pharmacie.dao.DAO {
                 String company = rs.getString("company");
                 int price = rs.getInt("price");
                 int qun = rs.getInt("qun");
-                item = new Article(id, nom, company, price,qun);
+                String description = rs.getString("description");
+                item = new Article(id, nom, company, price,qun,description);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -83,7 +85,8 @@ public class ArticlesDAOimp implements com.youcode.Pharmacie.dao.DAO {
                 String company = rs.getString("company");
                 int price = rs.getInt("price");
                 int qun = rs.getInt("qun");
-                article.add(new Article(id, nom, company, price,qun));
+                String description = rs.getString("description");
+                article.add(new Article(id, nom, company, price,qun,description));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -101,15 +104,17 @@ public class ArticlesDAOimp implements com.youcode.Pharmacie.dao.DAO {
         return rowDeleted;
     }
 
-    public boolean update(Article user) throws SQLException {
+    public boolean update(Article item) throws SQLException {
         boolean rowUpdated;
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_ARTICLES_SQL);) {
-            statement.setString(1, user.getNom());
-            statement.setString(2, user.getCompany());
-            statement.setInt(3, user.getPrice());
-            statement.setInt(4, user.getQun());
-            statement.setInt(5, user.getId());
+            statement.setString(1, item.getNom());
+            statement.setString(2, item.getCompany());
+            statement.setInt(3, item.getPrice());
+            statement.setInt(4, item.getQun());
+            statement.setString(5, item.getDescription());
+            statement.setInt(6, item.getId());
+
 
             rowUpdated = statement.executeUpdate() > 0;
         }
